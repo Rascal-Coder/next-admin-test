@@ -23,6 +23,16 @@ INSERT INTO public.n_menus (label, path, icon, show_in_menu, sort, parent_id)
 SELECT 'menu-manage', '/system-settings/menu-manage', 'menu', true, 1, id
 FROM public.n_menus WHERE path = '/system-settings' LIMIT 1;
 
+-- 2.1 插入「用户管理」下的 3 级菜单 test-nested
+INSERT INTO public.n_menus (label, path, icon, show_in_menu, sort, parent_id)
+SELECT 'test-nested', '/system-settings/user-manage/test-nested', 'folder-tree', true, 1, id
+FROM public.n_menus WHERE path = '/system-settings/user-manage' LIMIT 1;
+
+
+INSERT INTO public.n_menus (label, path, icon, show_in_menu, sort, parent_id)
+SELECT 'deep-level', '/system-settings/user-manage/test-nested/deep-level', 'layers', true, 0, id
+FROM public.n_menus WHERE path = '/system-settings/user-manage/test-nested' LIMIT 1;
+
 -- 3. 插入「沙盒」子菜单
 INSERT INTO public.n_menus (label, path, icon, show_in_menu, sort, parent_id)
 SELECT 'code-block', '/playground/code-block', 'code-2', true, 3, id
